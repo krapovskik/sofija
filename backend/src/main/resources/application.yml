@@ -1,0 +1,19 @@
+spring:
+
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/course_app"
+    username: "kosta"
+    password: "kosta123"
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    placeholderReplacement: false
+    locations:
+      - classpath:db/migration
+
+jwtSecret: "longsecurejwtsecret"
+jwtExpirationMs: "86400000"
