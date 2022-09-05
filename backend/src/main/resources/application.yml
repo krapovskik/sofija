@@ -1,9 +1,9 @@
 spring:
 
   datasource:
-    url: "jdbc:postgresql://localhost:5432/course_app"
-    username: "kosta"
-    password: "kosta123"
+    url: "jdbc:postgresql://ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/dbck9bup9mv30m"
+    username: "zjstpehsxzabcm"
+    password: "176d0f52b59415ceae60ce81dbd03b8acd03eda3ebac5a4f3fea395c096c0308"
 
   jpa:
     show-sql: true
