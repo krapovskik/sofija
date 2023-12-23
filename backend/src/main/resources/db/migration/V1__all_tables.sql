@@ -16,6 +16,7 @@ create table app_users
     is_enabled       boolean default false,
     certification_id bigint,
     time_started     timestamp,
+    role             text not null,
     constraint fk_app_users_certification_id foreign key (certification_id) references certifications (id)
 );
 

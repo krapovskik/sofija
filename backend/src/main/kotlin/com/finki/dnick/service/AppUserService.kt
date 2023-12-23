@@ -41,7 +41,8 @@ class AppUserService(
                 lastName = lastName,
                 email = email,
                 password = passwordEncoder.encode(password),
-                isEnabled = true
+                isEnabled = true,
+                role = "USER"
             )
 
             appUserRepository.save(appUser)

@@ -24,6 +24,9 @@ class AuthController(
     val mapperService: MapperService,
 ) {
 
+    @GetMapping
+    fun getAuthentication() = ""
+
     @PostMapping("/login")
     fun login(@RequestBody loginRequest: LoginRequest): ResponseEntity<JwtResponse> {
 
@@ -45,6 +48,7 @@ class AuthController(
                 appUser.firstName,
                 appUser.lastName,
                 appUser.email,
+                checkNotNull(appUser.authorities.firstOrNull()?.authority)
             )
         )
     }

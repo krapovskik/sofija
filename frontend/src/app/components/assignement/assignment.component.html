@@ -1,0 +1,71 @@
+<div class="row" *ngIf="problem">
+  <div class="col-md-6 p-5 lead" style="height: 90vh; overflow: auto">
+    <div>
+      <div [innerHTML]="problem?.problemDescription"></div>
+      <div [innerHTML]="problem?.functionDescription"></div>
+      <div [innerHTML]="problem?.returns"></div>
+      <div [innerHTML]="problem?.inputFormat"></div>
+      <div [innerHTML]="problem?.sampleInput"></div>
+      <div [innerHTML]="problem?.sampleOutput"></div>
+      <div [innerHTML]="problem?.explanation"></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <ngx-codemirror
+      [options]="codeMirrorOptions"
+      [(ngModel)]="query"
+      (ngModelChange)="setEditorContent($event)">
+    </ngx-codemirror>
+    <button class="btn btn-primary mt-2 mb-2 me-1" disabled *ngIf="loading">
+      <span class="spinner-grow spinner-grow-sm" role="status"></span>
+    </button>
+    <button (click)="submit(content)" type="button" class="btn btn-primary mt-2 mb-2 me-1" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" *ngIf="!loading && tokenService.isLoggedIn()">
+      Submit
+    </button>
+    <button disabled class="btn btn-primary mt-2 mb-2 me-1" *ngIf="!tokenService.isLoggedIn()">
+      Login to submit
+    </button>
+    <button (click)="reset()" class="btn btn-danger mt-2 mb-2 me-1">Reset</button>
+    <span>Use CTRL + Space for autocomplete</span>
+
+    <!-- Modal -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title" [ngClass]="passed == testCases.length ? 'text-success' : 'text-danger'">
+          Passed {{passed}}/{{testCases.length}}</h5>
+      </div>
+      <div class="modal-body">
+        <ngb-accordion [closeOthers]="true">
+          <ngb-panel *ngFor="let testCase of testCases; index as i" id="static-{{i}}">
+            <ng-template ngbPanelTitle>
+              <p class="m-0">Test case {{i + 1}}</p>
+              &nbsp;
+              <span *ngIf="testCase.passed" class="badge bg-success rounded-pill">&checkmark;</span>
+              <span *ngIf="!testCase.passed" class="badge bg-danger rounded-pill">&cross;</span>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="card card-body">
+                <p>Input:</p>
+                <p [innerHTML]="testCase.input"></p>
+                <div class="row">
+                  <div class="col">
+                    <p>Expected:</p>
+                    <p [innerHTML]="testCase.expected"></p>
+                  </div>
+                  <div class="col">
+                    <p>Got:</p>
+                    <p [innerHTML]="testCase.got"></p>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

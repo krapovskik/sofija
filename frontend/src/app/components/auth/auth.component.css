@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 56px);
+  background: rgb(33,37,41);
+  background: linear-gradient(180deg, rgba(33,37,41,1) 25%, rgba(255,193,7,1) 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

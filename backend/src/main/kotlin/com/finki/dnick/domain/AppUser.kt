@@ -17,6 +17,7 @@ data class AppUser(
     val email: String,
     private val password: String,
     private val isEnabled: Boolean = false,
+    val role: String,
 
     @ElementCollection
     val likedComments: MutableList<Long> = mutableListOf(),
@@ -36,7 +37,7 @@ data class AppUser(
     val timeStarted: LocalDateTime? = null,
 ) : UserDetails {
 
-    override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority("USER"))
+    override fun getAuthorities() = mutableListOf(SimpleGrantedAuthority(role))
 
     override fun getPassword() = password
 
